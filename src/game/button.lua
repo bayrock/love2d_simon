@@ -26,7 +26,6 @@ function drawButtons()
 		lg.setColor(v.r,v.g,v.b,v.a)
 
 		lg.push() -- draw the button
---	lg.scale(1,1)
 		lg.rectangle('fill',v.x,v.y,w,h)
 		lg.pop()
 	end

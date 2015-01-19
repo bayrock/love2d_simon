@@ -9,14 +9,9 @@ windowWidth = love.graphics.getWidth()
 windowHeight = love.graphics.getHeight()
 lg = love.graphics
 
-game = {} -- game state constructor
-function game:init()
-	CreateButton("green", 0, 0, 204, 255, 153, 255)
-	CreateButton("pink", 200, 0, 255, 153, 204, 255)
-	CreateButton("blue", 0, 200, 153, 204, 255, 255)
-	CreateButton("yellow", 200, 200, 255, 255, 153, 255)
+math.random = love.math.random
 
-	local seed = math.randomseed(os.time())
+local function buttonTest()
 	for lbl, v in pairs(GetAllButtons()) do -- run button test
 		local rand = math.random(2)
 		if rand == 2 then
@@ -26,6 +21,16 @@ function game:init()
 			print("Button "..lbl.." is off.")
 		end
 	end
+end
+
+game = {} -- game state constructor
+function game:init()
+	CreateButton("green", 0, 0, 204, 255, 153, 255)
+	CreateButton("pink", 200, 0, 255, 153, 204, 255)
+	CreateButton("blue", 0, 200, 153, 204, 255, 255)
+	CreateButton("yellow", 200, 200, 255, 255, 153, 255)
+
+	buttonTest()
 end
 
 function game:enter()

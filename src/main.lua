@@ -3,11 +3,11 @@ main.lua
 Author: Bayrock (http://Devinity.org)
 ]]
 
-require("game")
+require("game.game")
 gamestate = require ("lib.gamestate")
 
 function love.load()
-	love.graphics.setBackgroundColor(255, 255, 255)
+	love.graphics.setBackgroundColor(0, 0, 0)
 	gamestate.registerEvents()
 	gamestate.switch(game)
 	print("Loaded "..projectName..version)

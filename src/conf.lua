@@ -13,8 +13,8 @@ function love.conf(t)
     t.console = true
     t.window.title = projectName.."- build: "..version
     t.window.icon = nil
-    t.window.width = 250
-    t.window.height = 250
+    t.window.width = 400
+    t.window.height = 400
     t.window.borderless = false
     t.window.resizable = false
     t.window.minwidth = 1

@@ -3,7 +3,7 @@ game.lua
 Author: Bayrock (http://Devinity.org)
 ]]
 
-require("button")
+require("game.button")
 
 windowWidth = love.graphics.getWidth()
 windowHeight = love.graphics.getHeight()
@@ -11,43 +11,45 @@ lg = love.graphics
 
 game = {} -- game state constructor
 function game:init()
-	CreateButton("green", 60, 60, 204, 255, 153)
-	CreateButton("pink", 110, 110, 255, 153, 204)
-	CreateButton("blue", 160, 160, 153, 204, 255)
-	CreateButton("yellow", 210, 210, 255, 255, 153)
-end
+	CreateButton("green", 0, 0, 204, 255, 153, 255)
+	CreateButton("pink", 200, 0, 255, 153, 204, 255)
+	CreateButton("blue", 0, 200, 153, 204, 255, 255)
+	CreateButton("yellow", 200, 200, 255, 255, 153, 255)
 
---[[
-local alter = 25
-for i = 1, 10 do -- create 10 test buttons
-	CreateButton("btn"..i, 10 + alter, 10 + alter, 100, 100 , 100)
-	alter = alter + 25
-	print(GetButton("btn"..i).x, GetButton("btn"..i).y, "Toggled: "..tostring(GetButton("btn"..i).isOn)) -- print button data
+	local seed = math.randomseed(os.time())
+	for lbl, v in pairs(GetAllButtons()) do -- run button test
+		local rand = math.random(2)
+		if rand == 2 then
+			v.isOn = true
+			print("Button "..lbl.." is on.")
+		else
+			print("Button "..lbl.." is off.")
+		end
+	end
 end
-]]
 
 function game:enter()
-	-- enter game
+--	enter game
 end
 
 function game:update(dt)
---	updateButtons()
+	updateButtons()
 end
 
 local function drawDebug()
 	if debug then
+		lg.setColor(0, 0, 0)
 		lg.print(projectName..version, 5, 5)
 		lg.print("FPS: "..love.timer.getFPS( ), 5, 20)
-		for lbl, v in pairs(GetAllButtons()) do
-			-- creates a point at button coordinates
-			lg.point(GetButton(lbl).x, GetButton(lbl).y)
+		for _, v in pairs(GetAllButtons()) do
+			-- create a point at button coords
+			lg.point(v.x, v.y)
 		end
 	end
 end
 
 function game:draw()
 	drawButtons()
-	lg.setColor(0, 0, 0)
 	drawDebug()
 end
 

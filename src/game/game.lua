@@ -4,33 +4,20 @@ Author: Bayrock (http://Devinity.org)
 ]]
 
 require("game.button")
+require("game.sequence")
 
-windowWidth = love.graphics.getWidth()
-windowHeight = love.graphics.getHeight()
 lg = love.graphics
+windowWidth = lg.getWidth()
+windowHeight = lg.getHeight()
 
 math.random = love.math.random
 
-local function buttonTest()
-	for lbl, v in pairs(GetAllButtons()) do -- run button test
-		local rand = math.random(2)
-		if rand == 2 then
-			v.isOn = true
-			print("Button "..lbl.." is on.")
-		else
-			print("Button "..lbl.." is off.")
-		end
-	end
-end
-
 game = {} -- game state constructor
 function game:init()
-	CreateButton("green", 0, 0, 204, 255, 153, 255)
-	CreateButton("pink", 200, 0, 255, 153, 204, 255)
-	CreateButton("blue", 0, 200, 153, 204, 255, 255)
-	CreateButton("yellow", 200, 200, 255, 255, 153, 255)
-
-	buttonTest()
+	CreateButton("green", 0, 0, 204, 255, 153, 255, 200, 200)
+	CreateButton("pink", 200, 0, 255, 153, 204, 255, 200, 200)
+	CreateButton("blue", 0, 200, 153, 204, 255, 255, 200, 200)
+	CreateButton("yellow", 200, 200, 255, 255, 153, 255, 200, 200)
 end
 
 function game:enter()
@@ -47,7 +34,6 @@ local function drawDebug()
 		lg.print(projectName..version, 5, 5)
 		lg.print("FPS: "..love.timer.getFPS( ), 5, 20)
 		for _, v in pairs(GetAllButtons()) do
-			-- create a point at button coords
 			lg.point(v.x, v.y)
 		end
 	end
@@ -65,5 +51,17 @@ function game:keypressed(key)
 	elseif key == "`" and debug or key == "/" and debug then
 		debug = false
 	 	print("Debug overlay disabled")
+	end
+end
+
+function game:mousepressed(x, y, btn)
+	if btn == "l" then
+		mouse = true
+	end
+end
+
+function game:mousereleased(x, y, btn)
+	if btn == "l" then
+		mouse = false
 	end
 end

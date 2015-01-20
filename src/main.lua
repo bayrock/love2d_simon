@@ -7,7 +7,7 @@ require("game.game")
 gamestate = require ("lib.gamestate")
 
 function love.load()
-	love.graphics.setBackgroundColor(0, 0, 0)
+	lg.setBackgroundColor(0, 0, 0)
 	gamestate.registerEvents()
 	gamestate.switch(game)
 	print("Loaded "..projectName..version)

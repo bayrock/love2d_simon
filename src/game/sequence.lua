@@ -87,7 +87,9 @@ end
 
 --[[TODO
 
--- create sequence helpers
--- push/pop to sequence state
+-- add menu state
+-- pop to sequence on game init
+-- click sequence chain in order
+-- add a loser state
 
 ]]

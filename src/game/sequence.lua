@@ -24,11 +24,26 @@ function PlaySequence()
     dly = 2
 
     print("Started sequence:")
-    for _, v in pairs(GetSequence()) do
-      timer.add(dly, function() GetButton(v).isOn = true end)
-      dly = dly + 2
-      timer.add(dly, function() GetButton(v).isOn = false GetButton(v).a = 100 end)
-      print(v)
+    for k, v in pairs(GetSequence()) do
+      local dupe = false
+
+      if v == GetSeqKey(k - 1) then
+        dupe = true
+      else
+        dupe = false
+      end
+
+      if not dupe then
+        timer.add(dly, function() GetButton(v).isOn = true end)
+        dly = dly + 2
+        timer.add(dly, function() GetButton(v).isOn = false end)
+        print(v)
+      else
+        timer.add(dly + 1, function() GetButton(v).isOn = true end)
+        dly = dly + 4
+        timer.add(dly - 1, function() GetButton(v).isOn = false end)
+        print(v)
+      end
     end
 
     if dly >= GetSeqLength() * 2 then
@@ -44,7 +59,7 @@ function sequence:init()
   end
 end
 
-function sequence:enter(from)
+function sequence:enter()
   for _, v in pairs(GetAllButtons()) do
     v.isOn = false
     v.a = 100
@@ -84,6 +99,11 @@ end
 function GetSeqLength()
   return #seq
 end
+
+function GetSeqKey(key)
+  return seq[key]
+end
+
 
 --[[TODO
 

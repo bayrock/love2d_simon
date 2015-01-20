@@ -47,8 +47,9 @@ function game:keypressed(key)
 	elseif key == "`" and debug or key == "/" and debug then
 		debug = false
 	 	print("Debug overlay disabled")
+	else
+		gamestate.push(sequence)
 	end
-	gamestate.push(sequence)
 end
 
 function game:mousepressed(x, y, btn)

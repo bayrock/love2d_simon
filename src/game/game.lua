@@ -20,10 +20,6 @@ function game:init()
 	CreateButton("yellow", 200, 200, 255, 255, 153, 255, 200, 200)
 end
 
-function game:enter()
---	enter game
-end
-
 function game:update(dt)
 	updateButtons()
 end
@@ -52,6 +48,7 @@ function game:keypressed(key)
 		debug = false
 	 	print("Debug overlay disabled")
 	end
+	gamestate.push(sequence)
 end
 
 function game:mousepressed(x, y, btn)

@@ -4,7 +4,8 @@ Author: Bayrock (http://Devinity.org)
 ]]
 
 require("game.game")
-gamestate = require ("lib.gamestate")
+gamestate = require("lib.gamestate")
+timer = require("lib.timer")
 
 function love.load()
 	lg.setBackgroundColor(0, 0, 0)

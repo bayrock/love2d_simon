@@ -16,6 +16,8 @@ local function buttonIsHovered(x1,y1,w1,h1, mx,my)
 end
 
 function updateButtons()
+	if gamestate.current() == sequence then return end
+
 	local mx, my = love.mouse.getPosition()
 
 	for _, v in pairs(GetAllButtons()) do

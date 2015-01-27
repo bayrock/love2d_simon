@@ -3,9 +3,10 @@ sequence.lua
 Author: Bayrock (http://Devinity.org)
 ]]
 
-local seq = {}
-function ExtendSequence()
-local rand = math.random(4)
+seq = {}
+local function ExtendSequence()
+  local rand = math.random(4)
+
   if rand == 1 then
     table.insert(seq, "green")
   elseif rand == 2 then
@@ -18,13 +19,12 @@ local rand = math.random(4)
 end
 
 local played = false
-function PlaySequence()
+local function PlaySequence()
   if not played then
     local dly
     dly = 2
 
-    print("Started sequence:")
-    for k, v in pairs(GetSequence()) do
+    for k, v in pairs(ConstructSequence()) do
       local dupe = false
 
       if v == GetSeqKey(k - 1) then
@@ -34,35 +34,35 @@ function PlaySequence()
       end
 
       if not dupe then
-        timer.add(dly, function() GetButton(v).isOn = true end)
+        timer.add(dly, function() GetButton(v).isOn = true
+          GetButton(v).sound:play() end)
         dly = dly + 2
         timer.add(dly, function() GetButton(v).isOn = false end)
-        print(v)
       else
-        timer.add(dly + 1, function() GetButton(v).isOn = true end)
-        dly = dly + 4
-        timer.add(dly - 1, function() GetButton(v).isOn = false end)
-        print(v)
+        timer.add(dly + 0.5, function() GetButton(v).isOn = true
+          GetButton(v).sound:play() end)
+        dly = dly + 2.5
+        timer.add(dly, function() GetButton(v).isOn = false end)
       end
     end
 
     if dly >= GetSeqLength() * 2 then
-      timer.add(dly, function() played = true print("Finished sequence") end)
+      timer.add(dly, function() played = true end)
     end
   end
 end
 
 sequence = {}-- sequence state constructor
-function sequence:init()
-  for i= 1, 2 do
-    ExtendSequence()
-  end
-end
-
 function sequence:enter()
   for _, v in pairs(GetAllButtons()) do
-    v.isOn = false
+    v.isOn = false -- untoggle buttons
     v.a = 100
+  end
+
+  if GetSeqLength() == 0 then
+    for i= 1, 2 do
+      ExtendSequence()
+    end
   end
 
   played = false -- reset sequence
@@ -84,6 +84,9 @@ function sequence:update(dt)
   end
 
   if played then
+    for k, v in pairs(ConstructSequence()) do
+      table.insert(GetButtonSequence(), v)
+    end
     gamestate.pop()
   end
 end
@@ -92,7 +95,7 @@ function sequence:draw()
   drawButtons()
 end
 
-function GetSequence()
+function ConstructSequence()
   return seq
 end
 
@@ -103,13 +106,3 @@ end
 function GetSeqKey(key)
   return seq[key]
 end
-
-
---[[TODO
-
--- add menu state
--- pop to sequence on game init
--- click sequence chain in order
--- add a loser state
-
-]]

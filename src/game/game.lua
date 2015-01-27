@@ -3,6 +3,7 @@ game.lua
 Author: Bayrock (http://Devinity.org)
 ]]
 
+require("game.menu")
 require("game.button")
 require("game.sequence")
 
@@ -13,13 +14,6 @@ windowHeight = lg.getHeight()
 math.random = love.math.random
 
 game = {} -- game state constructor
-function game:init()
-	CreateButton("green", 0, 0, 204, 255, 153, 255, 200, 200)
-	CreateButton("pink", 200, 0, 255, 153, 204, 255, 200, 200)
-	CreateButton("blue", 0, 200, 153, 204, 255, 255, 200, 200)
-	CreateButton("yellow", 200, 200, 255, 255, 153, 255, 200, 200)
-end
-
 function game:update(dt)
 	updateButtons()
 end
@@ -28,7 +22,7 @@ local function drawDebug()
 	if debug then
 		lg.setColor(0, 0, 0)
 		lg.print(projectName..version, 5, 5)
-		lg.print("FPS: "..love.timer.getFPS( ), 5, 20)
+		lg.print("FPS: "..love.timer.getFPS(), 5, 20)
 		for _, v in pairs(GetAllButtons()) do
 			lg.point(v.x, v.y)
 		end
@@ -47,19 +41,18 @@ function game:keypressed(key)
 	elseif key == "`" and debug or key == "/" and debug then
 		debug = false
 	 	print("Debug overlay disabled")
-	else
-		gamestate.push(sequence)
 	end
 end
 
 function game:mousepressed(x, y, btn)
-	if btn == "l" then
+	if btn == "l" and not mouse then
 		mouse = true
 	end
 end
 
 function game:mousereleased(x, y, btn)
-	if btn == "l" then
+	if btn == "l" and mouse then
 		mouse = false
+		checkSequence()
 	end
 end

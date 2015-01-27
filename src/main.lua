@@ -10,7 +10,7 @@ timer = require("lib.timer")
 function love.load()
 	lg.setBackgroundColor(0, 0, 0)
 	gamestate.registerEvents()
-	gamestate.switch(game)
+	gamestate.switch(menu)
 	print("Loaded "..projectName..version)
 end
 

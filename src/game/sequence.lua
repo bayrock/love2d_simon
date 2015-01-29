@@ -84,10 +84,11 @@ function sequence:update(dt)
   end
 
   if played then
-    for k, v in pairs(ConstructSequence()) do
-      table.insert(GetButtonSequence(), v)
+    for _, v in pairs(ConstructSequence()) do
+      table.insert(buttonseq, v) -- fill sequence
     end
-    gamestate.pop()
+
+    gamestate.pop() -- pop sequence
   end
 end
 

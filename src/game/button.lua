@@ -23,7 +23,7 @@ end
 local w, h = 200, 200
 function updateButtons()
 	if GetSeqCount() < 1 then
-		gamestate.push(sequence)
+		gamestate.push(sequence) -- push sequence
 	end
 
 	if gamestate.current() == sequence then return end
@@ -84,15 +84,16 @@ function checkSequence()
 		elseif v.isHovered and not v.isCorrect then
 			v.sound:play()
 			print("incorrect")
-			highscore = GetSeqLength()
+
+			local score = GetSeqLength() - 1
+			if highscore < score then
+				highscore = score -- set highscore
+			end
+
 		 	seq = {} -- empty sequence
-			gamestate.switch(menu)
+			gamestate.switch(menu) -- switch to menu
 		end
 	end
-end
-
-function GetButtonSequence()
-	return buttonseq
 end
 
 function GetSeqCount()

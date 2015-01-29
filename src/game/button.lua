@@ -85,6 +85,8 @@ function checkSequence()
 			v.sound:play()
 			print("incorrect")
 
+			attempts = attempts + 1 -- increase attempts
+
 			local score = GetSeqLength() - 1
 			if highscore < score then
 				highscore = score -- set highscore

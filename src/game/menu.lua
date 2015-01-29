@@ -34,9 +34,12 @@ function menu:draw()
 	lg.setColor(0,0,0, alpha)
 	lg.printf("Press any key to play", 0, h/2, w, "center")
 	lg.setColor(0,0,0)
-	if highscore > 1 then
+	if highscore > 2 then
 		lg.printf("Game over!", 0, h/2 + 60, w, "center")
-		lg.printf("Highscore: "..highscore, 0, h/2 + 80, w, "center")
+		lg.printf("Highscore: "..highscore, 0, h/2 + 100, w, "center")
+		lg.printf("Attempts: "..attempts, 0, h/2 + 120, w, "center")
+	elseif attempts > 0 then
+		lg.printf("Game over!", 0, h/2 + 60, w, "center")
 	end
 end
 

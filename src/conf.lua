@@ -6,7 +6,8 @@ Author: Bayrock (http://Devinity.org)
 projectName = "Lua Simon "
 version = "v0.6"
 
-highscore = 0
+highscore = 2
+attempts = 0
 debug = false
 
 function love.conf(t)

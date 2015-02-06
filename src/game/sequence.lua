@@ -36,19 +36,17 @@ local function PlaySequence()
       if not dupe then
         timer.add(dly, function() GetButton(v).isOn = true
           GetButton(v).sound:play() end)
-        dly = dly + 2
+        dly = dly + 1.5
         timer.add(dly, function() GetButton(v).isOn = false end)
       else
         timer.add(dly + 0.5, function() GetButton(v).isOn = true
           GetButton(v).sound:play() end)
-        dly = dly + 2.5
+        dly = dly + 2
         timer.add(dly, function() GetButton(v).isOn = false end)
       end
     end
 
-    if dly >= GetSeqLength() * 2 then
-      timer.add(dly, function() played = true end)
-    end
+    timer.add(dly, function() played = true end)
   end
 end
 

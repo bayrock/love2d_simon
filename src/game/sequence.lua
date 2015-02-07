@@ -3,23 +3,23 @@ sequence.lua
 Author: Bayrock (http://Devinity.org)
 ]]
 
-seq = {}
-local function ExtendSequence()
+local sequence = {} -- stores sequence
+function ExtendSequence()
   local rand = math.random(4)
 
   if rand == 1 then
-    table.insert(seq, "green")
+    table.insert(sequence, "green")
   elseif rand == 2 then
-    table.insert(seq, "pink")
+    table.insert(sequence, "pink")
   elseif rand == 3 then
-    table.insert(seq, "blue")
+    table.insert(sequence, "blue")
   else
-    table.insert(seq, "yellow")
+    table.insert(sequence, "yellow")
   end
 end
 
-local played = false
-local function PlaySequence()
+played = false
+function PlaySequence()
   if not played then
     local dly
     dly = 2
@@ -50,58 +50,34 @@ local function PlaySequence()
   end
 end
 
-sequence = {}-- sequence state constructor
-function sequence:enter()
+function checkSequence()
   for _, v in pairs(GetAllButtons()) do
-    v.isOn = false -- untoggle buttons
-    v.a = 100
-  end
+    if v.isHovered and v.isCorrect then
+      v.sound:play()
+      table.remove(buttonseq, 1)
+    elseif v.isHovered and not v.isCorrect then
+      v.sound:play()
+      attempts = attempts + 1 -- increase attempts
 
-  if GetSeqLength() == 0 then
-    for i= 1, 2 do
-      ExtendSequence()
+      local score = GetSeqLength() - 1
+      if highscore < score then
+        highscore = score -- set highscore
+      end
+
+      sequence = {} -- empty sequence
+      gamestate.switch(menu) -- switch to menu state
     end
   end
-
-  played = false -- reset sequence
-
-  ExtendSequence() -- add color to sequence
-
-  PlaySequence() -- play sequence indicators
-end
-
-function sequence:update(dt)
-  timer.update(dt)
-
-  for _, v in pairs(GetAllButtons()) do
-    if not v.isOn then
-      v.a = 100
-    else
-      v.a = 255
-    end
-  end
-
-  if played then
-    for _, v in pairs(ConstructSequence()) do
-      table.insert(buttonseq, v) -- fill sequence
-    end
-
-    gamestate.pop() -- pop sequence
-  end
-end
-
-function sequence:draw()
-  drawButtons()
 end
 
 function ConstructSequence()
-  return seq
+  return sequence
 end
 
 function GetSeqLength()
-  return #seq
+  return #sequence
 end
 
 function GetSeqKey(key)
-  return seq[key]
+  return sequence[key]
 end

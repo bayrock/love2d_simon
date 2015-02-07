@@ -3,10 +3,6 @@ menu.lua
 Author: Bayrock (http://Devinity.org)
 ]]
 
-function font(size, font)
-	return lg.newFont(font or "game/font/coders_crux.ttf", size)
-end
-
 menu = {} -- menu state constructor
 function menu:init()
 	local one = love.audio.newSource("game/sound/one.mp3")
@@ -21,6 +17,10 @@ function menu:init()
 	CreateButton("pink", 200, 0, 255, 153, 204, 255, two)
 	CreateButton("blue", 0, 200, 153, 204, 255, 255, three)
 	CreateButton("yellow", 200, 200, 255, 255, 153, 255, four)
+end
+
+local function font(size, font)
+	return lg.newFont(font or "game/font/coders_crux.ttf", size)
 end
 
 local alpha = 253

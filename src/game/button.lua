@@ -3,7 +3,7 @@ button.lua
 Author: Bayrock (http://Devinity.org)
 ]]
 
-local button = {}
+local button = {} -- stores buttons
 function CreateButton(lbl, x, y, r, g , b, a, sound)
 	local lbl = lbl or ""
 
@@ -22,11 +22,11 @@ end
 
 local w, h = 200, 200
 function updateButtons()
-	if GetSeqCount() < 1 then
-		gamestate.push(sequence) -- push sequence
+	if #buttonseq < 1 then
+		gamestate.push(simon) -- push simon state
 	end
 
-	if gamestate.current() == sequence then return end
+	if gamestate.current() == simon then return end
 
 	local mx, my = love.mouse.getPosition()
 
@@ -73,31 +73,4 @@ end
 
 function GetAllButtons()
 	return button
-end
-
-function checkSequence()
-	for _, v in pairs(GetAllButtons()) do
-		if v.isHovered and v.isCorrect then
-			v.sound:play()
-			print("correct")
-			table.remove(buttonseq, 1)
-		elseif v.isHovered and not v.isCorrect then
-			v.sound:play()
-			print("incorrect")
-
-			attempts = attempts + 1 -- increase attempts
-
-			local score = GetSeqLength() - 1
-			if highscore < score then
-				highscore = score -- set highscore
-			end
-
-		 	seq = {} -- empty sequence
-			gamestate.switch(menu) -- switch to menu
-		end
-	end
-end
-
-function GetSeqCount()
-	return #buttonseq
 end

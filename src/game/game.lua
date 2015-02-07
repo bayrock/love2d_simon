@@ -5,6 +5,7 @@ Author: Bayrock (http://Devinity.org)
 
 require("game.menu")
 require("game.button")
+require("game.simon")
 require("game.sequence")
 
 lg = love.graphics

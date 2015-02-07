@@ -24,7 +24,7 @@ function PlaySequence()
     local dly
     dly = 2
 
-    for k, v in pairs(ConstructSequence()) do
+    for k, v in pairs(GetSequence()) do
       local dupe = false
 
       if v == GetSeqKey(k - 1) then
@@ -50,7 +50,7 @@ function PlaySequence()
   end
 end
 
-function checkSequence()
+function CheckSequence()
   for _, v in pairs(GetAllButtons()) do
     if v.isHovered and v.isCorrect then
       v.sound:play()
@@ -70,7 +70,7 @@ function checkSequence()
   end
 end
 
-function ConstructSequence()
+function GetSequence()
   return sequence
 end
 

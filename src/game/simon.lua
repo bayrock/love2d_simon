@@ -35,7 +35,7 @@ function simon:update(dt)
   end
 
   if played then
-    for _, v in pairs(ConstructSequence()) do
+    for _, v in pairs(GetSequence()) do
       table.insert(buttonseq, v) -- fill sequence
     end
 

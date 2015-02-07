@@ -54,6 +54,6 @@ end
 function game:mousereleased(x, y, btn)
 	if btn == "l" and mouse then
 		mouse = false
-		checkSequence()
+		CheckSequence()
 	end
 end

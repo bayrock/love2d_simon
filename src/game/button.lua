@@ -49,10 +49,10 @@ function updateButtons()
 			v.isCorrect = false
 		end
 
-		if not v.isOn then
-			v.a = 100
+		if v.isOn then
+			v.a = 210
 		else
-			v.a = 230
+			v.a = 100
 		end
 	end
 end

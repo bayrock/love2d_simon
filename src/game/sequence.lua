@@ -53,9 +53,11 @@ end
 function CheckSequence()
   for _, v in pairs(GetAllButtons()) do
     if v.isHovered and v.isCorrect then
+      v.sound:stop()
       v.sound:play()
       table.remove(buttonseq, 1) -- remove from sequence
     elseif v.isHovered and not v.isCorrect then
+      v.sound:stop()
       v.sound:play()
 
       attempts = attempts + 1

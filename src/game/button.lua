@@ -38,9 +38,9 @@ function updateButtons()
 		if buttonIsHovered(v.x, v.y, w, h, mx, my) then
 			v.isHovered = true
 			if mouse then
-				v.isOn = false
-			else
 				v.isOn = true
+			else
+				v.isOn = false
 			end
 		else
 			v.isHovered = false
@@ -52,12 +52,6 @@ function updateButtons()
 		else
 			v.isCorrect = false
 		end
-
-		if v.isOn then
-			v.a = 210
-		else
-			v.a = 100
-		end
 	end
 end
 
@@ -68,6 +62,20 @@ function drawButtons()
 		lg.push() -- draw the button
 		lg.rectangle('fill',v.x,v.y,w,h)
 		lg.pop()
+	end
+end
+
+function animateButtons(dt)
+	for _, v in pairs(GetAllButtons()) do
+		if v.isHovered
+		and v.a < 254
+		and not v.isOn then
+			v.a = v.a + 400 * dt
+		elseif v.isOn then
+			v.a = 100
+		elseif v.a > 100 then
+			v.a = v.a - 400 * dt
+		end
 	end
 end
 

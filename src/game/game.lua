@@ -15,8 +15,16 @@ windowHeight = lg.getHeight()
 math.random = love.math.random
 
 game = {} -- game state constructor
+function game:enter()
+	for _, v in pairs(GetAllButtons()) do
+		v.isOn = false
+		v.a = 100
+	end
+end
+
 function game:update(dt)
 	updateButtons()
+	animateButtons(dt)
 end
 
 local function drawDebug()

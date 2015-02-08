@@ -4,7 +4,7 @@ Author: Bayrock (http://Devinity.org)
 ]]
 
 projectName = "Lua Simon "
-version = "v0.6"
+version = "v0.7"
 
 debug = false
 

@@ -6,9 +6,10 @@ Author: Bayrock (http://Devinity.org)
 projectName = "Lua Simon "
 version = "v0.6"
 
+debug = false
+
 highscore = 2
 attempts = 0
-debug = false
 
 function love.conf(t)
   t.version = "0.9.1"

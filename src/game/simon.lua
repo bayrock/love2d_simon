@@ -27,10 +27,10 @@ function simon:update(dt)
   timer.update(dt)
 
   for _, v in pairs(GetAllButtons()) do
-    if not v.isOn then
-      v.a = 100
-    else
+    if v.isOn then
       v.a = 255
+    else
+      v.a = 100
     end
   end
 

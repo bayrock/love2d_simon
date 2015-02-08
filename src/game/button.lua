@@ -3,6 +3,10 @@ button.lua
 Author: Bayrock (http://Devinity.org)
 ]]
 
+--[[TODO
+- Add fade effect to button hover
+]]
+
 local button = {} -- stores buttons
 function CreateButton(lbl, x, y, r, g , b, a, sound)
 	local lbl = lbl or ""

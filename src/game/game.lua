@@ -7,12 +7,21 @@ require("game.menu")
 require("game.button")
 require("game.simon")
 require("game.sequence")
+require("game.console")
+require("game.commands")
 
 lg = love.graphics
-windowWidth = lg.getWidth()
-windowHeight = lg.getHeight()
+windowW = lg.getWidth()
+windowH = lg.getHeight()
 
 math.random = love.math.random
+
+
+--[[TODO
+- Add options menu
+- Add speed option
+- Add sound option
+]]
 
 game = {} -- game state constructor
 function game:enter()
@@ -23,11 +32,11 @@ function game:enter()
 end
 
 function game:update(dt)
-	updateButtons()
-	animateButtons(dt)
+	UpdateButtons()
+	AnimateButtons(dt)
 end
 
-local function drawDebug()
+function game:debug()
 	if debug then
 		lg.setColor(0, 0, 0)
 		lg.print(projectName..version, 5, 5)
@@ -39,17 +48,13 @@ local function drawDebug()
 end
 
 function game:draw()
-	drawButtons()
-	drawDebug()
+	DrawButtons()
+	self:debug()
 end
 
 function game:keypressed(key)
-	if key == "`" and not debug or key == "/" and not debug then
-		debug = true
-		print("Debug overlay enabled")
-	elseif key == "`" and debug or key == "/" and debug then
-		debug = false
-	 	print("Debug overlay disabled")
+	if key == "`" then
+		gamestate.push(console)
 	end
 end
 

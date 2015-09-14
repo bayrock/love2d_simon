@@ -13,7 +13,7 @@ attempts = 0
 
 function love.conf(t)
   t.version = "0.9.1"
-  t.console = true
+  t.console = false
   t.window.title = projectName.."- build: "..version
   t.window.icon = nil
   t.window.width = 400

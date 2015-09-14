@@ -24,7 +24,7 @@ function PlaySequence()
     local dly
     dly = 2
 
-    for k, v in pairs(GetSequence()) do
+    for k, v in ipairs(GetSequence()) do
       local dupe = false
 
       if v == GetSeqKey(k - 1) then
@@ -55,7 +55,7 @@ function CheckSequence()
     if v.isHovered and v.isCorrect then
       v.sound:stop()
       v.sound:play()
-      table.remove(buttonseq, 1) -- remove from sequence
+      table.remove(GetButtonSequence(), 1) -- remove from sequence
     elseif v.isHovered and not v.isCorrect then
       v.sound:stop()
       v.sound:play()

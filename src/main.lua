@@ -11,6 +11,7 @@ function love.load()
 	lg.setBackgroundColor(0, 0, 0)
 	gamestate.registerEvents()
 	gamestate.switch(menu)
+	love.keyboard.setTextInput(false)
 	print("Loaded "..projectName..version)
 end
 

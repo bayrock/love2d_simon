@@ -36,7 +36,7 @@ function simon:update(dt)
 
   if played then
     for _, v in pairs(GetSequence()) do
-      table.insert(buttonseq, v) -- fill sequence
+      table.insert(GetButtonSequence(), v) -- fill sequence
     end
 
     gamestate.pop() -- pop to game state
@@ -44,5 +44,5 @@ function simon:update(dt)
 end
 
 function simon:draw()
-  drawButtons()
+  DrawButtons()
 end

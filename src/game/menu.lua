@@ -25,9 +25,9 @@ end
 
 local alpha = 253
 function menu:draw()
-	drawButtons()
+	DrawButtons()
 
-	local w,h = windowWidth, windowHeight
+	local w,h = windowW, windowH
 	lg.setFont(font(32))
 	lg.setColor(0,0,0)
 	lg.printf(projectName..version, 0, h/2 - 40, w, "center")
@@ -53,7 +53,7 @@ function menu:enter()
 end
 
 local animate = false
-local function anim(dt)
+function menu:anim(dt)
 	if alpha >= 254 then
 		animate = false
 	elseif alpha <= 63 then
@@ -68,10 +68,14 @@ local function anim(dt)
 end
 
 function menu:update(dt)
-	anim(dt)
+	self:anim(dt)
 end
 
-function menu:keyreleased(key)
-	buttonseq = {}
-	gamestate.switch(game)
+function menu:keypressed(key)
+	if key == "`" then
+		gamestate.push(console)
+	else
+		ClearButtonSequence()
+		gamestate.switch(game)
+	end
 end

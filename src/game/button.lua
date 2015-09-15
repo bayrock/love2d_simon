@@ -1,6 +1,6 @@
 --[[
 button.lua
-Author: Bayrock (http://Devinity.org)
+Author: Bayrock
 ]]
 
 local button = {}

@@ -1,6 +1,6 @@
 --[[
 simon.lua
-Author: Bayrock (http://Devinity.org)
+Author: Bayrock
 ]]
 
 simon = {} -- simon state constructor
@@ -35,7 +35,7 @@ function simon:update(dt)
   end
 
   if played then
-    for _, v in pairs(GetSequence()) do
+    for _, v in ipairs(GetSequence()) do
       table.insert(GetButtonSequence(), v) -- fill sequence
     end
 

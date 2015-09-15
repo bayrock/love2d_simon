@@ -1,6 +1,6 @@
 --[[
 conf.lua
-Author: Bayrock (http://Devinity.org)
+Author: Bayrock
 ]]
 
 projectName = "Lua Simon "

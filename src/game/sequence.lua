@@ -1,6 +1,6 @@
 --[[
 sequence.lua
-Author: Bayrock (http://Devinity.org)
+Author: Bayrock
 ]]
 
 local sequence = {} -- stores sequence

@@ -1,6 +1,6 @@
 --[[
 game.lua
-Author: Bayrock (http://Devinity.org)
+Author: Bayrock
 ]]
 
 require("game.menu")

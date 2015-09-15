@@ -1,6 +1,6 @@
 --[[
 menu.lua
-Author: Bayrock (http://Devinity.org)
+Author: Bayrock
 ]]
 
 menu = {} -- menu state constructor

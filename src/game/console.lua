@@ -54,7 +54,7 @@ function console:display()
 		local txt = tbl[1]
 		local r, g, b = tbl[2], tbl[3], tbl[4]
 
-		if k > 20 then
+		if k > 15 then
 			table.remove(prints, 1)
 		end
 
